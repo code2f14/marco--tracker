@@ -1,0 +1,161 @@
+:root{
+  --bg:#0b1220; --card:#0f172a; --muted:#94a3b8;
+  --accent:#22c55e; --accent2:#38bdf8; --warn:#f59e0b; --danger:#ef4444;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:radial-gradient(1200px 600px at 20% -10%, #0f172a, var(--bg));
+  color:#e5e7eb;
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+}
+.app{max-width:1100px;margin:auto;padding:24px 16px 56px}
+header{
+  display:flex;justify-content:space-between;align-items:center;gap:12px;
+  margin-bottom:12px
+}
+h1{margin:0;font-size:28px;letter-spacing:-.02em}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:12px}
+
+.card{
+  grid-column:span 12;
+  background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01));
+  border:1px solid rgba(148,163,184,.15);
+  border-radius:16px;
+  padding:14px;
+  box-shadow:0 10px 30px rgba(0,0,0,.25);
+}
+
+@media(min-width:900px){
+  .span-4{grid-column:span 4}
+  .span-5{grid-column:span 5}
+  .span-6{grid-column:span 6}
+  .span-7{grid-column:span 7}
+  .span-8{grid-column:span 8}
+}
+
+h2{font-size:16px;margin:0 0 8px;color:#c7d2fe}
+
+.row{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.row-3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+
+input,select,button{
+  border:1px solid rgba(148,163,184,.2);
+  background:rgba(2,6,23,.6);
+  color:#e5e7eb;
+  padding:10px 12px;
+  border-radius:12px;
+  outline:none;
+}
+
+button{
+  border:none;
+  background:linear-gradient(135deg,var(--accent),#16a34a);
+  color:#052e16;
+  font-weight:800;
+  cursor:pointer;
+  box-shadow:0 10px 20px rgba(34,197,94,.25);
+}
+button.secondary{
+  background:linear-gradient(135deg,#38bdf8,#0ea5e9);
+  color:#082f49;
+  box-shadow:0 10px 20px rgba(56,189,248,.25);
+}
+button.ghost{
+  background:transparent;
+  color:#e5e7eb;
+  border:1px dashed rgba(148,163,184,.35);
+  box-shadow:none;
+}
+
+.list{list-style:none;padding:0;margin:0}
+.item{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:8px;
+  padding:8px 0;
+  border-bottom:1px dashed rgba(148,163,184,.2);
+}
+.item small{color:var(--muted)}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.stat{
+  background:rgba(2,6,23,.6);
+  border:1px solid rgba(148,163,184,.2);
+  border-radius:12px;
+  padding:10px;
+  text-align:center;
+}
+
+.pill{
+  display:inline-flex;gap:6px;align-items:center;
+  padding:6px 10px;border-radius:999px;
+  background:rgba(34,197,94,.12);
+  color:#86efac;border:1px solid rgba(34,197,94,.35);
+  font-weight:700;
+}
+
+.meter{
+  height:10px;border-radius:999px;background:#020617;
+  overflow:hidden;border:1px solid rgba(148,163,184,.2);
+}
+.meter > div{
+  height:100%;
+  background:linear-gradient(90deg,#22c55e,#38bdf8);
+}
+
+canvas{
+  background:rgba(2,6,23,.5);
+  border-radius:12px;
+  padding:8px;
+}
+
+/* --- DASHBOARD RINGS --- */
+.rings{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(140px,1fr));
+  gap:12px;
+  margin-top:12px;
+}
+@media(max-width:700px){
+  .rings{grid-template-columns:repeat(2,minmax(140px,1fr))}
+}
+.ring-card{
+  background:rgba(2,6,23,.55);
+  border:1px solid rgba(148,163,184,.18);
+  border-radius:16px;
+  padding:12px;
+}
+.ring-top{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:8px;
+}
+.ring-top strong{color:#c7d2fe}
+.ring-top small{color:var(--muted);font-weight:800}
+
+.ring{
+  width:120px;height:120px;margin:6px auto 0;
+  display:grid;place-items:center;position:relative;
+}
+.ring svg{width:120px;height:120px;transform:rotate(-90deg)}
+.ring .bg{stroke:rgba(148,163,184,.18);stroke-width:10;fill:none}
+.ring .fg{
+  stroke:url(#ringGrad);
+  stroke-width:10;
+  fill:none;
+  stroke-linecap:round;
+  transition:stroke-dashoffset .5s ease;
+}
+.ring-center{
+  position:absolute;text-align:center;transform:translateY(2px);
+}
+.ring-center .big{font-weight:900;font-size:20px;letter-spacing:-.02em}
+.ring-center .sub{font-size:12px;color:var(--muted)}
+footer{
+  margin-top:40px;
+  padding-top:16px;
+  border-top:1px dashed rgba(148,163,184,.25);
+  text-align:center;
+  color:var(--muted);
+  font-size:13px;
+}

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Macro Tracker By R3.3cE</title>
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0b1220">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+<div class="app">
+
+  <header>
+    <div>
+      <h1>Macro Tracker By R3.3cE</h1>
+      <small style="color:var(--muted)">Track calories & macros. Stay consistent.</small>
+    </div>
+    <input id="datePicker" type="date" />
+  </header>
+
+  <section class="grid">
+
+    <!-- DASHBOARD -->
+    <div class="card span-12">
+      <h2 style="margin:0">Dashboard</h2>
+      <small style="color:var(--muted)">Today’s progress vs goals</small>
+
+      <div class="rings">
+
+        <!-- Calories -->
+        <div class="ring-card">
+          <div class="ring-top">
+            <strong>Calories</strong>
+            <small><span id="calPct">0</span>%</small>
+          </div>
+          <div class="ring">
+            <svg viewBox="0 0 120 120">
+              <defs>
+                <linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#22c55e"></stop>
+                  <stop offset="100%" stop-color="#38bdf8"></stop>
+                </linearGradient>
+              </defs>
+              <circle class="bg" cx="60" cy="60" r="44"></circle>
+              <circle class="fg" id="ringCalories" cx="60" cy="60" r="44"></circle>
+            </svg>
+            <div class="ring-center">
+              <div class="big"><span id="sumCalories">0</span></div>
+              <div class="sub">/ <span id="goalCalories">0</span> kcal</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Protein -->
+        <div class="ring-card">
+          <div class="ring-top">
+            <strong>Protein</strong>
+            <small><span id="proPct">0</span>%</small>
+          </div>
+          <div class="ring">
+            <svg viewBox="0 0 120 120">
+              <circle class="bg" cx="60" cy="60" r="44"></circle>
+              <circle class="fg" id="ringProtein" cx="60" cy="60" r="44"></circle>
+            </svg>
+            <div class="ring-center">
+              <div class="big"><span id="sumProtein">0</span>g</div>
+              <div class="sub">/ <span id="goalProtein">0</span>g</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Carbs -->
+        <div class="ring-card">
+          <div class="ring-top">
+            <strong>Carbs</strong>
+            <small><span id="carbPct">0</span>%</small>
+          </div>
+          <div class="ring">
+            <svg viewBox="0 0 120 120">
+              <circle class="bg" cx="60" cy="60" r="44"></circle>
+              <circle class="fg" id="ringCarbs" cx="60" cy="60" r="44"></circle>
+            </svg>
+            <div class="ring-center">
+              <div class="big"><span id="sumCarbs">0</span>g</div>
+              <div class="sub">/ <span id="goalCarbs">0</span>g</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fat -->
+        <div class="ring-card">
+          <div class="ring-top">
+            <strong>Fat</strong>
+            <small><span id="fatPct">0</span>%</small>
+          </div>
+          <div class="ring">
+            <svg viewBox="0 0 120 120">
+              <circle class="bg" cx="60" cy="60" r="44"></circle>
+              <circle class="fg" id="ringFat" cx="60" cy="60" r="44"></circle>
+            </svg>
+            <div class="ring-center">
+              <div class="big"><span id="sumFat">0</span>g</div>
+              <div class="sub">/ <span id="goalFat">0</span>g</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div style="margin-top:12px">
+        <div class="meter"><div id="meterBar" style="width:0%"></div></div>
+        <small id="meterText" style="color:var(--muted)"></small>
+        <div style="margin-top:8px" class="pill">🔥 Streak: <span id="streak">0</span> days</div>
+      </div>
+    </div>
+
+    <!-- ADD FOOD -->
+    <div class="card span-6">
+      <h2>Add Food</h2>
+      <input id="name" placeholder="Food name" />
+      <div class="row-3">
+        <input id="protein" type="number" placeholder="Protein (g)" />
+        <input id="carbs" type="number" placeholder="Carbs (g)" />
+        <input id="fat" type="number" placeholder="Fat (g)" />
+      </div>
+      <button onclick="addFood()">Add</button>
+    </div>
+
+    <!-- GOALS -->
+    <div class="card span-6">
+      <h2>Goals</h2>
+      <input id="bw" type="number" placeholder="Bodyweight (lbs)" />
+      <select id="mode">
+        <option value="cut">Cut</option>
+        <option value="maintain">Maintain</option>
+        <option value="bulk">Bulk</option>
+      </select>
+      <button onclick="updateGoals()">Update Goals</button>
+      <div id="goalsText" class="pill" style="margin-top:8px"></div>
+    </div>
+
+    <!-- PRESETS -->
+    <div class="card span-12">
+      <h2>Meal Presets</h2>
+      <div id="presetButtons" class="row-3"></div>
+    </div>
+
+    <!-- TODAY LIST -->
+    <div class="card span-12">
+      <h2>Today’s Meals</h2>
+      <ul id="list" class="list"></ul>
+      <div id="summary" class="stats"></div>
+    </div>
+
+  </section>
+
+  <footer>(Created By <strong>R3.3ce</strong>)</footer>
+</div>
+
+<!-- PWA SERVICE WORKER -->
+<script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("./service-worker.js");
+    });
+  }
+</script>
+
+</body>
+</html>

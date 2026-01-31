@@ -1,0 +1,14 @@
+{
+  "name": "Macro Tracker By R3.3cE",
+  "short_name": "Macro Tracker",
+  "description": "Track calories & macros. Stay consistent.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0b1220",
+  "theme_color": "#0b1220",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "https://chatgpt.com/backend-api/estuary/content?id=file_00000000d6a87246b25754810f91aada&ts=491636&p=fs&cid=1&sig=56fde23beb9ae053c84ac1e155e3e9e3129239ad63ff3664828e01aa75087c7e&v=0" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "https://chatgpt.com/backend-api/estuary/content?id=file_00000000d6a87246b25754810f91aada&ts=491636&p=fs&cid=1&sig=56fde23beb9ae053c84ac1e155e3e9e3129239ad63ff3664828e01aa75087c7e&v=0" }
+  ]
+}
